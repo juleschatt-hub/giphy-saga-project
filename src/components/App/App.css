@@ -1,0 +1,7 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    font-size: 30px;
+    gap: 30px;
+}
