@@ -1,5 +1,7 @@
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import "./App.css"
+import Search from '../Search/Search';
+
 function App() {
   return (
     <div className="App">
@@ -16,7 +18,7 @@ function App() {
         </ul>
   
     <Route path="/" exact>
-      search view
+      <Search />search view
     </Route>
     <Route path="/favorite">
       favorite view
