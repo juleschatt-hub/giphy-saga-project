@@ -1,5 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
+// require('dotenv').config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 import React, {useState} from 'react';
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
