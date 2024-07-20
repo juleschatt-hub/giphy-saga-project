@@ -2,6 +2,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import "./App.css"
 import Search from '../Search/Search';
 
+
 function App() {
   return (
     <div className="App">

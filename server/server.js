@@ -9,6 +9,11 @@ const GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 const PORT = process.env.PORT || 5001;
 
 
+app.get('/api_key', (req, res) => {
+  res.send(GIPHY_API_KEY);
+  res.json({GIPHY_API_KEY})
+});
+
 /** ---------- MIDDLEWARE ---------- **/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

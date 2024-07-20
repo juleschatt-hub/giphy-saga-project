@@ -3,12 +3,7 @@ const app = express()
 import React, {useState} from 'react';
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
-app.get('/', (req, res) => {
-    res.send('hello world')
-    console.log(res.data)
-  })
-
-const gf = new GiphyFetch(GIPHY_API_KEY);
+const gf = new GiphyFetch('GIPHY_API_KEY');
 
 function Search() {
 
