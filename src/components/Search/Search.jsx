@@ -1,18 +1,20 @@
-import 'dotenv/config';
-// require('dotenv').config();
-// import dotenv from 'dotenv';
-// dotenv.config();
+const express = require('express')
+const app = express()
 import React, {useState} from 'react';
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
+app.get('/', (req, res) => {
+    res.send('hello world')
+    console.log(res.data)
+  })
 
-const GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 const gf = new GiphyFetch(GIPHY_API_KEY);
 
 function Search() {
 
 const [text, setText] = useState('');
 const [gifs, setGifs] = useState('');
+
 const handleInput = (e) => {
     setText(e.target.value)
 };

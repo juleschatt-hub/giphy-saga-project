@@ -1,8 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const favoriteRouter = require('./routes/favorite.router');
 const categoryRouter = require('./routes/category.router');
+
+const GIPHY_API_KEY = process.env.GIPHY_API_KEY; 
+
 const PORT = process.env.PORT || 5001;
+
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(express.json());
@@ -15,5 +20,5 @@ app.use('/api/categories', categoryRouter);
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+  console.log(`Listening on port: ${PORT}`, `secret key for GIPHY is: ${GIPHY_API_KEY}`);
 });
