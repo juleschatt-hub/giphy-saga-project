@@ -1,14 +1,16 @@
-const express = require('express')
-const app = express()
+
 import React, {useState} from 'react';
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
-const gf = new GiphyFetch('GIPHY_API_KEY');
+
+
+
+
 
 function Search() {
 
 const [text, setText] = useState('');
-const [gifs, setGifs] = useState('');
+const [gifs, setGifs] = useState([]);
 
 const handleInput = (e) => {
     setText(e.target.value)
