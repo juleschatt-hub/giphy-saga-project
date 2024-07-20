@@ -1,10 +1,8 @@
-
 import React, {useState} from 'react';
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
-
-
-
+const gf = new GiphyFetch('REACT_APP_GIPHY_KEY');
+// const gf = new GiphyFetch('Vbb3105fA96JybPITEL4SFCG0oCwyKQI');
 
 
 function Search() {
