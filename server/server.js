@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('build'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
-app.get('/api_key', (req, res) => {
+app.get('/gif', (req, res) => {
   res.send(REACT_APP_GIPHY_KEY);
   // res.json({REACT_APP_GIPHY_KEY: REACT_APP_GIPHY_KEY})
 });
