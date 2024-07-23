@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { GiphyFetch } from '@giphy/js-fetch-api'
+import { GiphyFetch } from '@giphy/js-fetch-api';
 
-const gf = new GiphyFetch('REACT_APP_GIPHY_KEY');
-// const gf = new GiphyFetch('Vbb3105fA96JybPITEL4SFCG0oCwyKQI');
+//const gf = new GiphyFetch('REACT_APP_GIPHY_KEY');
+ const gf = new GiphyFetch('Vbb3105fA96JybPITEL4SFCG0oCwyKQI');
 
 
 function Search() {
@@ -22,7 +22,7 @@ const searchGifs = async () => {
       console.error('Error fetching GIFs:', error);
     }
   };
-
+console.log('gifs', gifs);
 return (
 <>
 <h1>Search for a GIF</h1>
