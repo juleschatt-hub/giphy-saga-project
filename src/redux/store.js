@@ -17,15 +17,17 @@ function* fetchCategories() {
     try {
         const categoriesResponse = yield axios.get('/api/categories');
         yield put({type: 'GET_CATEGORIES', payload: categoriesResponse.data});
-        //console.log(categoriesResponse);
     }
     catch(error) {
         console.log('Error fetching categories:', error);
     }
 }
 
+//SEND FAVORITES FUNCTION TO POST FAVORITES TO DB GOES HERE
+
 function* rootSaga() {
     yield takeEvery('FETCH_CATEGORIES', fetchCategories);
+    //CREATE SEND_FAVORITES SAGA
 }
 
 const sagaMiddleware = createSagaMiddleware();
