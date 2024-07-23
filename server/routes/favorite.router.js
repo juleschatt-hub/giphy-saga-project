@@ -5,13 +5,46 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  res.sendStatus(200);
+  const queryText = `
+    SELECT * FROM "favorites"
+    ORDER BY name asc;
+  `;
+  pool.query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+      console.log('result.rows', result.rows);
+    })
+    .catch((error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+    });
 });
 
 // add a new favorite
 router.post('/', (req, res) => {
-  res.sendStatus(201);
-});
+  const newFavorite = req.body;
+  const queryText = `
+    INSERT INTO "favorites"
+      ("name", "category_id", "gif_id", "gif_url", "gif_title")
+      VALUES
+      ($1, $2, $3, $4, $5);
+  `;
+  const queryValues = [
+   newFavorite.name,
+   newFavorite.category_id,
+   newFavorite.gif_id,
+   newFavorite.gif_url,
+   newFavorite.gif_title
+  ];
+  pool.query(queryText, queryValues)
+    .then((result) => { 
+      res.sendStatus(201); 
+      console.log(newFavorite);
+    })
+    .catch((err) => {
+      console.log('Error in POST /api/plants', err);
+      res.sendStatus(500);
+    });});
 
 // update a favorite's associated category
 router.put('/:id', (req, res) => {

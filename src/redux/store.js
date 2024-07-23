@@ -4,6 +4,8 @@ import createSagaMiddleware from 'redux-saga';
 import axios from "axios";
 import { takeEvery, put } from 'redux-saga/effects';
 
+
+//REDUCERS
 const categoriesList = (state = [], action) => {
     switch(action.type) {
         case 'GET_CATEGORIES':
@@ -13,6 +15,19 @@ const categoriesList = (state = [], action) => {
     }
 }
 
+
+
+const favorites = (state = [], action) => {
+    switch(action.type){
+        case 'GET_FAVORITES':
+            return action.payload
+                      
+        default:
+            return state
+    }
+}
+
+//SAGA ROUTES/GENERATOR FUNCTIONS
 function* fetchCategories() {
     try {
         const categoriesResponse = yield axios.get('/api/categories');
@@ -23,18 +38,46 @@ function* fetchCategories() {
     }
 }
 
-//SEND FAVORITES FUNCTION TO POST FAVORITES TO DB GOES HERE
+function* fetchFavorites() {
+    try {
+        const favoritesResponse = yield axios.get('/api/favorites');
+        yield put({type: 'GET_FAVORITES', payload: favoritesResponse.data});
+        //console.log('favorites response:', favoritesResponse)
+    }
+    catch(error) {
+        console.log('error fetching favorites', error)
+    }
+}
+// function* addFavorite(action) {
+//     try {
+//         const favoritesResponse = axios({method: 'POST', 
+//             url: '/api/favorites', 
+//             data: {name: action.payload.name}});
+//             yield put({type: 'ADD_FAVORITE'});
+//     }
+//     catch(error) {
+//         console.log('error adding to favorites', error);
+//     }
+// }
 
+//SAGAS
 function* rootSaga() {
+    yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('FETCH_CATEGORIES', fetchCategories);
-    //CREATE SEND_FAVORITES SAGA
+    // yield takeEvery('ADD_FAVORITE', addFavorite);
+    
+    
 }
 
 const sagaMiddleware = createSagaMiddleware();
 
+//REDUX STORE
 const store = createStore(
     combineReducers(
-        {categoriesList}
+        {categoriesList,
+        favorites
+        }
+
     ),
     applyMiddleware(sagaMiddleware, logger)
 );

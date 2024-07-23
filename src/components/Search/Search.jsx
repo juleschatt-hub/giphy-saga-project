@@ -31,7 +31,11 @@ return (
     <button onClick={searchGifs}>Search</button>
         <div>
           {gifs.map((gif) => (
-            <img key={gif.id} src={gif.images.downsized.url} alt={gif.title} />
+            <>
+              <img key={gif.id} src={gif.images.downsized.url} alt={gif.title} />         
+              <button>Add to Favorites</button>
+              <br/>
+            </>
           ))}
         </div>
 </div>
