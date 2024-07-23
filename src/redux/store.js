@@ -15,13 +15,13 @@ const categoriesList = (state = [], action) => {
     }
 }
 
-let initialState = []
-const favorites = (state = initialState, action) => {
+
+
+const favorites = (state = [], action) => {
     switch(action.type){
-        // case 'ADD_FAVORITE':
-        //     return [...state, action.payload]
         case 'GET_FAVORITES':
             return action.payload
+                      
         default:
             return state
     }
@@ -42,28 +42,30 @@ function* fetchFavorites() {
     try {
         const favoritesResponse = yield axios.get('/api/favorites');
         yield put({type: 'GET_FAVORITES', payload: favoritesResponse.data});
+        //console.log('favorites response:', favoritesResponse)
     }
     catch(error) {
         console.log('error fetching favorites', error)
     }
 }
-function* addFavorite(action) {
-    try {
-        const favoritesResponse = axios({method: 'POST', 
-            url: '/api/favorites', 
-            data: {name: action.payload.name}});
-            yield put({type: 'ADD_FAVORITE'});
-    }
-    catch(error) {
-        console.log('error adding to favorites', error);
-    }
-}
+// function* addFavorite(action) {
+//     try {
+//         const favoritesResponse = axios({method: 'POST', 
+//             url: '/api/favorites', 
+//             data: {name: action.payload.name}});
+//             yield put({type: 'ADD_FAVORITE'});
+//     }
+//     catch(error) {
+//         console.log('error adding to favorites', error);
+//     }
+// }
 
 //SAGAS
 function* rootSaga() {
-    yield takeEvery('FETCH_CATEGORIES', fetchCategories);
-    yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+    yield takeEvery('FETCH_CATEGORIES', fetchCategories);
+    // yield takeEvery('ADD_FAVORITE', addFavorite);
+    
     
 }
 
@@ -72,8 +74,9 @@ const sagaMiddleware = createSagaMiddleware();
 //REDUX STORE
 const store = createStore(
     combineReducers(
-        {categoriesList},
-        {favorites},
+        {categoriesList,
+        favorites
+        }
 
     ),
     applyMiddleware(sagaMiddleware, logger)
