@@ -22,7 +22,7 @@ const searchGifs = async () => {
       console.error('Error fetching GIFs:', error);
     }
   };
-
+console.log('gifs', gifs);
 return (
 <>
 <h1>Search for a GIF</h1>

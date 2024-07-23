@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+
+
 function FavoriteView() {
     const favorites = [{
         url: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wildlife_at_Maasai_Mara_%28Lion%29.jpg",
@@ -20,6 +24,14 @@ function FavoriteView() {
         'whimsical'
 
     ]
+
+    const dispatch = useDispatch();
+    const categoriesReducer = useSelector(store => store.categoriesList);
+    useEffect(() => {
+        dispatch({type: 'FETCH_CATEGORIES'})
+
+    }, [])
+
     return <div className="favorites">
         {favorites.map((favorite) => (
             <div className="favorite">
