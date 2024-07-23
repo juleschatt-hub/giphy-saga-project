@@ -5,3 +5,13 @@
     font-size: 30px;
     gap: 30px;
 }
+.favorite{
+    display: flex;
+    flex-direction: column;
+
+}
+.favorites{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}

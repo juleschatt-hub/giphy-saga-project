@@ -30,3 +30,10 @@ INSERT INTO "categories"
   "name" VARCHAR (100) NOT NULL,
   "category_id" INT REFERENCES "categories"
 );
+
+
+-- Added columns to favorites table to save needed gif data to local DB
+ALTER TABLE favorites
+ADD gif_id VARCHAR(100),
+ADD gif_url VARCHAR(250),
+ADD gif_title VARCHAR(100);

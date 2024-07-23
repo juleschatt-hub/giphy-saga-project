@@ -2,6 +2,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import "./App.css"
 
 import Search from '../Search/Search';
+import Favorites from '../Favorites/Favorites';
 
 
 
@@ -16,7 +17,7 @@ function App() {
             <Link to="/">Search</Link>
           </li>
           <li>
-            <Link to="/favorite">Favorites</Link>
+            <Link to="/favorites">Favorites</Link>
           </li>
         </ul>
   
@@ -26,8 +27,8 @@ function App() {
 
 
     </Route>
-    <Route path="/favorite">
-      favorite view
+    <Route path="/favorites">
+      <Favorites />
     </Route>
     </div>
     </Router>
