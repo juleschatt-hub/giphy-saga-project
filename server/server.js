@@ -6,6 +6,8 @@ const categoryRouter = require('./routes/category.router');
 
 const REACT_APP_GIPHY_KEY = process.env.REACT_APP_GIPHY_KEY; 
 
+const apiUrl = https://api.giphy.com/v1/gifs/search?api_key={REACT_APP_GIPHY_KEY}&q={searchQuery}&limit=10
+
 const PORT = process.env.PORT || 5001;
 
 /** ---------- MIDDLEWARE ---------- **/
