@@ -6,6 +6,15 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 
 //REDUCERS
+const search = (state = [], action) => {
+    switch(action.type) {
+        case 'GET_SEARCH':
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const categoriesList = (state = [], action) => {
     switch(action.type) {
         case 'GET_CATEGORIES':
@@ -28,6 +37,16 @@ const favorites = (state = [], action) => {
 }
 
 //SAGA ROUTES/GENERATOR FUNCTIONS
+function* fetchSearch() {
+    try {
+        const searchResponse = yield axios.get('/api/search');
+        yield put({type: 'GET_SEARCH', payload: searchResponse.data});
+    }
+    catch(error) {
+        console.log('Error fetching search:', error);
+    }
+}
+
 function* fetchCategories() {
     try {
         const categoriesResponse = yield axios.get('/api/categories');
@@ -64,6 +83,7 @@ function* fetchFavorites() {
 function* rootSaga() {
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('FETCH_CATEGORIES', fetchCategories);
+    yield takeEvery('FETCH_SEARCH', fetchSearch);
     // yield takeEvery('ADD_FAVORITE', addFavorite);
     
     
@@ -75,7 +95,8 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     combineReducers(
         {categoriesList,
-        favorites
+        favorites,
+        search
         }
 
     ),
